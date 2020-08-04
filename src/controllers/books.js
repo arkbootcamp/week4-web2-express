@@ -2,8 +2,15 @@ const booksModels = require('../models/books')
 
 const books = {
     getBookById: (req, res) =>{
-        const data = req.params.data;
-        res.send("helo "+ data)
+        const id = req.params.id;
+        booksModels.getBookById(id)
+        .then((result)=>{
+            resultBooks = result;
+            res.json(resultBooks);
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     },
     getAllbook: (req, res) =>{
         booksModels.getAllbook()
@@ -16,13 +23,63 @@ const books = {
         })
     },
     updateBook: (req, res) =>{
-        res.send("update book")
+        const id = req.params.idtes
+        const {title, description, image, status, idCategory, author} = req.body
+        const data = {
+            title,
+            description,
+            image,
+            status,
+            idCategory,
+            author,
+            createdAt: new Date(),
+            updatedAt:new Date()
+        }
+        booksModels.updateBook(id, data)
+        .then((result)=>{
+            const resultBooks = result;
+            console.log(result)
+            res.json(resultBooks)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     },
     deleteBook: (req, res) =>{
-        res.send('delete books')
+        const id = req.params.id
+        booksModels.deleteBook(id)
+        .then((result)=>{
+            resultBooks = result;
+            res.json(resultBooks);
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     },
     insertBook: (req, res) =>{
-        res.send('insert books')
+        // const title = req.body.title
+        // const description = req.body.description
+        const {title, description, image, status, idCategory, author} = req.body
+        const data = {
+            title,
+            description,
+            image,
+            status,
+            idCategory,
+            author,
+            createdAt: new Date(),
+            updatedAt:new Date()
+        }
+        booksModels.insertBook(data)
+        .then((result)=>{
+            const resultBooks = result;
+            console.log(result)
+            res.json(resultBooks)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+
     }
 }
 

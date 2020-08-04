@@ -1,7 +1,16 @@
 const connection = require('../configs/db')
 
 const books = {
-    getBookById: () =>{
+    getBookById: (id) =>{
+        return new Promise((resolve, reject) =>{
+            connection.query("SELECT * FROM books where id = ?", id, (err, result) =>{
+                if(!err){
+                    resolve(result)
+                }else{
+                    reject( new Error(err))
+                }
+            })
+        })
     },
     getAllbook: () =>{
         return new Promise((resolve, reject) =>{
@@ -14,11 +23,39 @@ const books = {
             })
         })
     },
-    updateBook: () =>{
+    updateBook: (id, data) =>{
+        return new Promise((resolve, reject) =>{
+            connection.query("UPDATE books SET ? WHERE id = ?", [data, id], (err, result)=>{
+                if(!err){
+                    resolve(result)
+                }else{
+                    reject( new Error(err))
+                }
+            })
+        })
     },
-    deleteBook: () =>{
+    deleteBook: (id) =>{
+        return new Promise((resolve, reject) =>{
+            connection.query("DELETE FROM books WHERE id = ?", id, (err, result)=>{
+                if(!err){
+                    resolve(result)
+                }else{
+                    reject( new Error(err))
+                }
+            })
+        })
     },
-    insertBook: () =>{
+    insertBook: (data) =>{
+        console.log(data)
+        return new Promise((resolve, reject) =>{
+            connection.query("INSERT INTO books SET ?", data, (err, result)=>{
+                if(!err){
+                    resolve(result)
+                }else{
+                    reject( new Error(err))
+                }
+            })
+        })
     }
 }
 
