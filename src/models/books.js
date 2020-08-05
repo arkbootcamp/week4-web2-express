@@ -3,7 +3,7 @@ const connection = require('../configs/db')
 const books = {
     getBookById: (id) =>{
         return new Promise((resolve, reject) =>{
-            connection.query("SELECT * FROM books where id = ?", id, (err, result) =>{
+            connection.query(`SELECT * FROM books INNER JOIN  where id = ?`, id, (err, result) =>{
                 if(!err){
                     resolve(result)
                 }else{

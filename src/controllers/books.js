@@ -1,4 +1,5 @@
 const booksModels = require('../models/books')
+const hellper = require('../helpers/helpers')
 
 const books = {
     getBookById: (req, res) =>{
@@ -6,7 +7,8 @@ const books = {
         booksModels.getBookById(id)
         .then((result)=>{
             resultBooks = result;
-            res.json(resultBooks);
+            // res.json(resultBooks);
+            hellper.renponse(res, resultBooks, 200, null)
         })
         .catch((err)=>{
             console.log(err)
@@ -16,7 +18,8 @@ const books = {
         booksModels.getAllbook()
         .then((result)=>{
             resultBooks = result;
-            res.json(resultBooks);
+            // res.json(resultBooks);
+            hellper.renponse(res, resultBooks, 200, null)
         })
         .catch((err)=>{
             console.log(err)
