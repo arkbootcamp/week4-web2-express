@@ -1,14 +1,13 @@
-const express = require('express');
-const routerBooks = require('./books');
-// const routerCategetory = require('./category')
+const express = require('express')
+const routerBooks = require('./books')
+const routerUsers = require('./users')
 const routerHistory = require('./history')
 
-
-const router = express.Router();
+const router = express.Router()
 
 router
-    .use('/books',routerBooks)
-    // .use('/category',routerCategetory)
-    // .use('/hostory', routerHistory)
+  .use('/books', routerBooks)
+  .use('/users',routerUsers)
+// .use('/hostory', routerHistory)
 
-module.exports = router;
+module.exports = router
