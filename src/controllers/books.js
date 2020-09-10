@@ -9,7 +9,7 @@ const books = {
       .then((result) => {
         resultBooks = result
         // res.json(resultBooks);
-        hellper.renponse(res, resultBooks, 200, null)
+        hellper.renponse(res, reinsultBooks, 200, null)
       })
       .catch((err) => {
         console.log(err)
@@ -34,23 +34,34 @@ const books = {
     })
   },
   updateBook: (req, res) => {
+    console.log(req.file)
     const id = req.params.idtes
-    const { title, description, image, status, idCategory, author } = req.body
+    const { title, description, idCategory, author } = req.body
     const data = {
       title,
       description,
-      image,
-      status,
       idCategory,
       author,
       createdAt: new Date(),
       updatedAt: new Date()
     }
+    if(req.file){
+      data.image = `http://localhost:4017/uploads/${req.file.filename}`
+    }
+    // const data = {
+    //   title,
+    //   description,
+    //   image:`http://localhost:4017/uploads/${req.file.filename}`,
+    //   idCategory,
+    //   author,
+    //   createdAt: new Date(),
+    //   updatedAt: new Date()
+    // }
     booksModels.updateBook(id, data)
       .then((result) => {
         const resultBooks = result
         console.log(result)
-        res.json(resultBooks)
+        hellper.renponse(res, resultBooks, 200)
       })
       .catch((err) => {
         console.log(err)
@@ -70,13 +81,12 @@ const books = {
   insertBook: (req, res) => {
     // const title = req.body.title
     // const description = req.body.description
-    console.log(req.file);
     const { title, description, status, idCategory, author } = req.body
     const data = {
       title,
       description,
       image: `http://localhost:4017/uploads/${req.file.filename}`,
-      status,
+      status: 1,
       idCategory,
       author,
       createdAt: new Date(),
@@ -85,7 +95,6 @@ const books = {
     booksModels.insertBook(data)
       .then((result) => {
         const resultBooks = result
-        console.log(result)
         res.json(resultBooks)
       })
       .catch((err) => {

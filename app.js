@@ -27,4 +27,4 @@ app.use('/api/v1/', routes)
 const PORT = process.env.PORT
 
 app.use('/uploads', express.static('./uploads'))
-app.listen(PORT, () => { console.log(`server is running ${PORT}`) })
+app.listen(PORT, () => { console.log(`server is running 🚀 ${PORT}`) })

@@ -8,9 +8,9 @@ const redis = require('../middlewares/redis')
 
 router
   .get('/:id',verifyAccess, booksController.getBookById)
-  .get('/',verifyAccess,redis.cacheGetAllBook, paginationBook, booksController.getAllbook)
-  .post('/', verifyAccess, redis.clearGetAllbooks, multer.upload.single('image'), booksController.insertBook)
-  .patch('/:idtes',verifyAccess, booksController.updateBook)
+  .get('/',verifyAccess, paginationBook, booksController.getAllbook)
+  .post('/', verifyAccess, multer.upload.single('image'), booksController.insertBook)
+  .patch('/:idtes', multer.upload.single('image'), booksController.updateBook)
   .delete('/:id',verifyAccess, booksController.deleteBook)
 
 module.exports = router
