@@ -2,6 +2,7 @@ const booksModels = require('../models/books')
 const hellper = require('../helpers/helpers')
 const redis = require('redis')
 const client = redis.createClient(6379);
+const path= require('path')
 const books = {
   getBookById: (req, res) => {
     const id = req.params.id
@@ -79,27 +80,29 @@ const books = {
       })
   },
   insertBook: (req, res) => {
+    console.log(req.files)
+    console.log(path.extname('./books.js'))
     // const title = req.body.title
     // const description = req.body.description
-    const { title, description, status, idCategory, author } = req.body
-    const data = {
-      title,
-      description,
-      image: `http://localhost:4017/uploads/${req.file.filename}`,
-      status: 1,
-      idCategory,
-      author,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }
-    booksModels.insertBook(data)
-      .then((result) => {
-        const resultBooks = result
-        res.json(resultBooks)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    // const { title, description, status, idCategory, author } = req.body
+    // const data = {
+    //   title,
+    //   description,
+    //   image: `http://localhost:4017/uploads/${req.file.filename}`,
+    //   status: 1,
+    //   idCategory,
+    //   author,
+    //   createdAt: new Date(),
+    //   updatedAt: new Date()
+    // }
+    // booksModels.insertBook(data)
+    //   .then((result) => {
+    //     const resultBooks = result
+    //     res.json(resultBooks)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
   }
 }
 
